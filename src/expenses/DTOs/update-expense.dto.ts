@@ -1,4 +1,6 @@
 export class UpdateExpenseDto {
-    category?: string
-    price?: number
+    category?: string;
+    productName?: string;
+    quantity?: number;
+    price?: number;
 }
