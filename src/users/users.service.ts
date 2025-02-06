@@ -35,7 +35,7 @@ export class UsersService {
     deleteUserById(id: number) {
         const index = this.users.findIndex(el => el.id === id);
         if (index === -1) {
-            throw new HttpException('Invalid user ID provided', HttpStatus.BAD_REQUEST);
+            throw new HttpException('User Not found', HttpStatus.NOT_FOUND);
         }
         const deletedUser = this.users.splice(index, 1);
         return deletedUser;
@@ -47,7 +47,7 @@ export class UsersService {
             throw new HttpException('Invalid user ID provided', HttpStatus.BAD_REQUEST);
         }
         const updatedUser = {
-            ...this.users[index], // Keep existing values
+            ...this.users[index],
             firstName: body.firstName || this.users[index].firstName,
             lastName: body.lastName || this.users[index].lastName,
             email: body.email || this.users[index].email,

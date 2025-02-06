@@ -27,7 +27,7 @@ export class ExpensesService {
             productName: body.productName,
             quantity: body.quantity,
             price: body.price,
-            totalPrice: body.quantity * body.price // Auto-calculate total price
+            totalPrice: body.quantity * body.price
         };
         this.expenses.push(newExpense);
         return newExpense;
@@ -36,7 +36,7 @@ export class ExpensesService {
     deleteExpenseById(id: number) {
         const index = this.expenses.findIndex(el => el.id === id);
         if (index === -1) {
-            throw new HttpException('Invalid expense ID provided', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Expense Not Found', HttpStatus.NOT_FOUND);
         }
         const deletedExpense = this.expenses.splice(index, 1);
         return deletedExpense;
@@ -48,7 +48,7 @@ export class ExpensesService {
             throw new HttpException('Invalid expense ID provided', HttpStatus.BAD_REQUEST);
         }
         const updatedExpense = {
-            ...this.expenses[index], // Keep existing values
+            ...this.expenses[index],
             category: body.category || this.expenses[index].category,
             productName: body.productName || this.expenses[index].productName,
             quantity: body.quantity || this.expenses[index].quantity,
